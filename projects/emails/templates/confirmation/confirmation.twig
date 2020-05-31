@@ -1,0 +1,15 @@
+<mjml>
+  <mj-head>
+    {% include 'confirmation/partials/classes.twig' %}
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text mj-class="headline"> Hello to all my Friends:</mj-text>
+        {% for user in users %}
+          <mj-text mj-class="headline">{{ user.name }}</mj-text>
+        {% endfor %}
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -60,6 +60,10 @@
       "single"
     ],
     "trailing-comma": false,
+    "typedef": [
+      true,
+      "call-signature"
+    ],
     "component-class-suffix": true,
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
