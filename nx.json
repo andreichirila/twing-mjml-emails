@@ -22,14 +22,7 @@
     "email-live-editor": {
       "tags": []
     },
-    "email-live-editor-e2e": {
-      "tags": [],
-      "implicitDependencies": ["email-live-editor"]
-    },
-    "api": {
-      "tags": []
-    },
-    "api-interfaces": {
+    "email-templating-api": {
       "tags": []
     }
   }

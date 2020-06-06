@@ -1,10 +1,22 @@
 {
-  "extends": "../../tslint.json",
-  "rules": {
-    "directive-selector": [true, "attribute", "emails", "camelCase"],
-    "component-selector": [true, "element", "emails", "kebab-case"]
-  },
-  "linterOptions": {
-    "exclude": ["!**/*"]
-  }
+    "extends": "../../tslint.json",
+    "rules": {
+        "directive-selector": [
+            true,
+            "attribute",
+            "emails",
+            "camelCase"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            "emails",
+            "kebab-case"
+        ]
+    },
+    "linterOptions": {
+        "exclude": [
+            "!**/*"
+        ]
+    }
 }

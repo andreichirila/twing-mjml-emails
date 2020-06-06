@@ -62,8 +62,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "email-live-editor:build",
-            "proxyConfig": "apps/email-live-editor/proxy.conf.json"
+            "browserTarget": "email-live-editor:build"
           },
           "configurations": {
             "production": {
@@ -98,47 +97,31 @@
         }
       }
     },
-    "email-live-editor-e2e": {
-      "root": "apps/email-live-editor-e2e",
-      "sourceRoot": "apps/email-live-editor-e2e/src",
+    "email-templating-api": {
+      "root": "apps/email-templating-api",
+      "sourceRoot": "apps/email-templating-api/src",
       "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/email-live-editor-e2e/cypress.json",
-            "tsConfig": "apps/email-live-editor-e2e/tsconfig.e2e.json",
-            "devServerTarget": "email-live-editor:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "email-live-editor:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/email-live-editor-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/email-live-editor-e2e/**"]
-          }
-        }
-      }
-    },
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "prefix": "api",
+      "prefix": "email-templating-api",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
           "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "outputPath": "dist/apps/email-templating-api",
+            "main": "apps/email-templating-api/src/main.ts",
+            "tsConfig": "apps/email-templating-api/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./apps/email-templating-api/src/assets",
+                "output": "./assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./templates",
+                "output": "./assets"
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -147,8 +130,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
+                  "replace": "apps/email-templating-api/src/environments/environment.ts",
+                  "with": "apps/email-templating-api/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -157,50 +140,24 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "api:build"
+            "buildTarget": "email-templating-api:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
+              "apps/email-templating-api/tsconfig.app.json",
+              "apps/email-templating-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/**"]
+            "exclude": ["**/node_modules/**", "!apps/email-templating-api/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "tsConfig": "apps/api/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/api-interfaces/tsconfig.lib.json",
-              "libs/api-interfaces/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api-interfaces/jest.config.js",
-            "tsConfig": "libs/api-interfaces/tsconfig.spec.json",
+            "jestConfig": "apps/email-templating-api/jest.config.js",
+            "tsConfig": "apps/email-templating-api/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
