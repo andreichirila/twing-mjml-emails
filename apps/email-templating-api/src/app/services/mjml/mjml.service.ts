@@ -1,10 +1,7 @@
 import {Injectable} from '@nestjs/common';
 
 @Injectable()
-export class AppService {
-    public getData(): any {
-        return {message: 'Welcome to api!'};
-    }
+export class MjmlService {
 }
 
 // old code to be migrated to nestjs....
