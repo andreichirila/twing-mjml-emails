@@ -110,18 +110,7 @@
             "outputPath": "dist/apps/email-templating-api",
             "main": "apps/email-templating-api/src/main.ts",
             "tsConfig": "apps/email-templating-api/tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "./apps/email-templating-api/src/assets",
-                "output": "./assets"
-              },
-              {
-                "glob": "**/*",
-                "input": "./templates",
-                "output": "./assets"
-              }
-            ]
+            "assets": ["apps/email-templating-api/src/assets"]
           },
           "configurations": {
             "production": {
