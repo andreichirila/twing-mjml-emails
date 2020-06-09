@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {CompileTemplateParams} from '../../../shared/interfaces/compile-template-params';
 import {map} from 'rxjs/operators';
 import {CompileTemplateResponse} from '../../../shared/interfaces/compile-template-response';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
     selector: 'emails-root',
@@ -13,16 +14,17 @@ import {CompileTemplateResponse} from '../../../shared/interfaces/compile-templa
 })
 export class AppComponent {
 
-    public compiledTemplate$: Observable<string>;
+    public compiledTemplate$: Observable<SafeHtml>;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient,
+                private domSanitizer: DomSanitizer) {
 
         const emailID = 'confirmation';
 
         const exampleData = {
             users: [
-                {name: 'Node'},
-                {name: 'Twig'},
+                {name: 'NestJS'},
+                {name: 'Twing'},
                 {name: 'MJML'},
                 {name: 'Angular'}
             ]
@@ -31,9 +33,10 @@ export class AppComponent {
         this.compiledTemplate$ = this.compileEmail(emailID, {values: exampleData});
     }
 
-    private compileEmail(id: string, values: CompileTemplateParams): Observable<string> {
-        return this.httpClient.post<CompileTemplateResponse>(`${environment.apiUrl}/compile-template/${id}`, values).pipe(
-            map(response => response.compiledTemplate)
+    private compileEmail(id: string, values: CompileTemplateParams): Observable<SafeHtml> {
+        return this.httpClient.post<CompileTemplateResponse>(`${environment.apiUrl}/templates/compile/${id}`, values).pipe(
+            map(response => response.compiledTemplate),
+            map(template => this.domSanitizer.bypassSecurityTrustHtml(template))
         );
     }
 }

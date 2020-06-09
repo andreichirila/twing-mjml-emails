@@ -1,12 +1,13 @@
 import {Module} from '@nestjs/common';
-import {CompileTemplateController} from './controllers/compile-template/compile-template.controller';
 import {MjmlService} from './services/mjml/mjml.service';
 import {TwingService} from './services/twing/twing.service';
+import {TemplatesController} from './controllers/templates/templates.controller';
+import {PathsService} from './services/paths/paths.service';
 
 @Module({
     imports: [],
-    controllers: [CompileTemplateController],
-    providers: [MjmlService, TwingService]
+    controllers: [TemplatesController],
+    providers: [MjmlService, TwingService, PathsService]
 })
 export class AppModule {
 }
